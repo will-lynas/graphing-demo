@@ -95,7 +95,7 @@ export function TemperatureChart({
             name="temperature"
             // stroke="var(--color-temperature)"
             strokeWidth={2}
-            dot={showDetails ? { r: 4 } : false}
+            dot={false}
             activeDot={{ r: 6 }}
           />
         </LineChart>

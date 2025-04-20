@@ -92,7 +92,7 @@ export function HumidityChart({
             // TODO: fix this
             // stroke="var(--color-humidity)"
             strokeWidth={2}
-            dot={showDetails ? { r: 4 } : false}
+            dot={false}
             activeDot={{ r: 6 }}
           />
         </LineChart>
