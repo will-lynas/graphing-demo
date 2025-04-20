@@ -1,32 +1,48 @@
-"use client"
+"use client";
 
-import { format } from "date-fns"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { format } from "date-fns";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+} from "recharts";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 
 interface WeatherData {
-  date: string
-  temperature_c: number
-  humidity_percent: number
-  uv_index: number
-  precipitation_mm: number
-  wind_speed_kmh: number
-  id: string
+  date: string;
+  temperature_c: number;
+  humidity_percent: number;
+  uv_index: number;
+  precipitation_mm: number;
+  wind_speed_kmh: number;
+  id: string;
 }
 
 interface TemperatureChartProps {
-  data: WeatherData[]
-  showDetails?: boolean
+  data: WeatherData[];
+  showDetails?: boolean;
 }
 
-export function TemperatureChart({ data, showDetails = false }: TemperatureChartProps) {
+export function TemperatureChart({
+  data,
+  showDetails = false,
+}: TemperatureChartProps) {
   const chartData = data
     .map((item) => ({
       date: format(new Date(item.date), "MMM dd"),
       value: item.temperature_c,
       rawDate: item.date,
     }))
-    .sort((a, b) => new Date(a.rawDate).getTime() - new Date(b.rawDate).getTime())
+    .sort(
+      (a, b) => new Date(a.rawDate).getTime() - new Date(b.rawDate).getTime(),
+    );
 
   return (
     <ChartContainer
@@ -49,14 +65,28 @@ export function TemperatureChart({ data, showDetails = false }: TemperatureChart
           }}
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey="date" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} tickMargin={10} />
+          <XAxis
+            dataKey="date"
+            tickLine={false}
+            axisLine={false}
+            tick={{ fontSize: 12 }}
+            tickMargin={10}
+          />
           <YAxis
             tickLine={false}
             axisLine={false}
             tick={{ fontSize: 12 }}
             tickMargin={10}
             domain={["auto", "auto"]}
-            label={showDetails ? { value: "Temperature (°C)", angle: -90, position: "insideLeft" } : undefined}
+            label={
+              showDetails
+                ? {
+                    value: "Temperature (°C)",
+                    angle: -90,
+                    position: "insideLeft",
+                  }
+                : undefined
+            }
           />
           <ChartTooltip content={<ChartTooltipContent />} />
           <Line
@@ -71,5 +101,5 @@ export function TemperatureChart({ data, showDetails = false }: TemperatureChart
         </LineChart>
       </ResponsiveContainer>
     </ChartContainer>
-  )
+  );
 }
