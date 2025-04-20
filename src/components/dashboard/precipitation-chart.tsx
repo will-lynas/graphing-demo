@@ -41,7 +41,7 @@ export function PrecipitationChart({
       rawDate: item.date,
     }))
     .sort(
-      (a, b) => new Date(a.rawDate).getTime() - new Date(b.rawDate).getTime(),
+      (a, b) => new Date(a.rawDate).getTime() - new Date(b.rawDate).getTime()
     );
 
   return (
@@ -92,6 +92,8 @@ export function PrecipitationChart({
           <Bar
             dataKey="value"
             name="precipitation"
+            // TODO: do this properly
+            className="fill-chart-2"
             fill="var(--color-precipitation)"
             radius={[4, 4, 0, 0]}
           />

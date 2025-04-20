@@ -151,6 +151,8 @@ export function WeatherComparison({ data }: WeatherComparisonProps) {
                 <Radar
                   name="metrics"
                   dataKey="value"
+                  // TODO: fix this
+                  className="stroke-chart-4 fill-chart-4/50"
                   stroke="var(--color-metrics)"
                   fill="var(--color-metrics)"
                   fillOpacity={0.6}
