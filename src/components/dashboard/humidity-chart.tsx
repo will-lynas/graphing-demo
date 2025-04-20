@@ -89,7 +89,8 @@ export function HumidityChart({
             type="monotone"
             dataKey="value"
             name="humidity"
-            stroke="var(--color-humidity)"
+            // TODO: fix this
+            // stroke="var(--color-humidity)"
             strokeWidth={2}
             dot={showDetails ? { r: 4 } : false}
             activeDot={{ r: 6 }}

@@ -41,7 +41,7 @@ export function TemperatureChart({
       rawDate: item.date,
     }))
     .sort(
-      (a, b) => new Date(a.rawDate).getTime() - new Date(b.rawDate).getTime(),
+      (a, b) => new Date(a.rawDate).getTime() - new Date(b.rawDate).getTime()
     );
 
   return (
@@ -93,7 +93,7 @@ export function TemperatureChart({
             type="monotone"
             dataKey="value"
             name="temperature"
-            stroke="var(--color-temperature)"
+            // stroke="var(--color-temperature)"
             strokeWidth={2}
             dot={showDetails ? { r: 4 } : false}
             activeDot={{ r: 6 }}
