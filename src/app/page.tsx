@@ -1,70 +1,145 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { TemperatureChart } from "@/components/dashboard/temperature-chart";
+import { HumidityChart } from "@/components/dashboard/humidity-chart";
+import { PrecipitationChart } from "@/components/dashboard/precipitation-chart";
+import { WeatherComparison } from "@/components/dashboard/weather-comparison";
+import { weatherData } from "@/lib/data";
 
-interface WeatherData {
-  date: string;
-  temperature_c: number;
-  humidity_percent: number;
-  uv_index: number;
-  precipitation_mm: number;
-  wind_speed_kmh: number;
-  id: string;
-}
-
-export default function Home() {
-  const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchWeatherData = async () => {
-      try {
-        const response = await fetch("https://fake-api.lynas.dev/weather");
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setWeatherData(data);
-        setLoading(false);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
-        setLoading(false);
-      }
-    };
-
-    fetchWeatherData();
-  }, []);
-
+export default function DashboardPage() {
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Weather Information</h1>
-
-      {loading && <p>Loading weather data...</p>}
-
-      {error && <p className="text-red-500">Error: {error}</p>}
-
-      {!loading && !error && weatherData.length > 0 && (
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Weather Forecast</h2>
-          <div className="space-y-4">
-            {weatherData.map((item) => (
-              <div key={item.id} className="border p-3 rounded shadow-sm">
-                <p className="font-medium">
-                  {new Date(item.date).toLocaleDateString()}
-                </p>
-                <p>Temperature: {item.temperature_c}°C</p>
-                <p>Humidity: {item.humidity_percent}%</p>
-                <p>UV Index: {item.uv_index}</p>
-                <p>Precipitation: {item.precipitation_mm} mm</p>
-                <p>Wind Speed: {item.wind_speed_kmh} km/h</p>
+    <div className="flex min-h-screen w-full flex-col">
+      <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Avg. Temperature
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {(
+                  weatherData.reduce(
+                    (sum, item) => sum + item.temperature_c,
+                    0
+                  ) / weatherData.length
+                ).toFixed(1)}
+                °C
               </div>
-            ))}
-          </div>
+              <p className="text-xs text-muted-foreground">
+                Based on {weatherData.length} data points
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Avg. Humidity
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {(
+                  weatherData.reduce(
+                    (sum, item) => sum + item.humidity_percent,
+                    0
+                  ) / weatherData.length
+                ).toFixed(1)}
+                %
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Based on {weatherData.length} data points
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Max UV Index
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {Math.max(...weatherData.map((item) => item.uv_index)).toFixed(
+                  1
+                )}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Highest recorded value
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Total Precipitation
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {weatherData
+                  .reduce((sum, item) => sum + item.precipitation_mm, 0)
+                  .toFixed(1)}{" "}
+                mm
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Cumulative rainfall
+              </p>
+            </CardContent>
+          </Card>
         </div>
-      )}
+
+        <div className="grid gap-4 md:grid-cols-2">
+          <Card>
+            <CardHeader>
+              <CardTitle>Temperature Trends</CardTitle>
+              <CardDescription>
+                Daily temperature readings in Celsius
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="h-[300px]">
+              <TemperatureChart data={weatherData} showDetails />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Humidity Levels</CardTitle>
+              <CardDescription>Daily humidity percentage</CardDescription>
+            </CardHeader>
+            <CardContent className="h-[300px]">
+              <HumidityChart data={weatherData} showDetails />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Precipitation</CardTitle>
+              <CardDescription>Daily rainfall in millimeters</CardDescription>
+            </CardHeader>
+            <CardContent className="h-[300px]">
+              <PrecipitationChart data={weatherData} showDetails />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Weather Metrics Comparison</CardTitle>
+              <CardDescription>
+                Radar chart comparing all weather metrics
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="h-[300px]">
+              <WeatherComparison data={weatherData} />
+            </CardContent>
+          </Card>
+        </div>
+      </main>
     </div>
   );
 }
