@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { WeatherComparison } from "@/components/dashboard/weather-comparison";
-import { WeatherData } from "@/lib/data";
+import { WeatherData } from "@/lib/weather-data";
 
 interface WeatherMetricsComparisonCardProps {
   data: WeatherData[];

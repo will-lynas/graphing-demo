@@ -1,4 +1,4 @@
-import { WeatherData } from "@/lib/data";
+import { WeatherData } from "@/lib/weather-data";
 import { AverageTemperatureCard } from "@/components/dashboard/average-temperature-card";
 import { AverageHumidityCard } from "@/components/dashboard/average-humidity-card";
 import { MaxUvIndexCard } from "@/components/dashboard/max-uv-index-card";

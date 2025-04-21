@@ -1,4 +1,4 @@
-import { weatherData } from "@/lib/data";
+import { weatherData } from "@/lib/weather-data";
 import { NextResponse } from "next/server";
 
 export function GET() {

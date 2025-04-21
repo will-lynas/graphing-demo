@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { TemperatureChart } from "@/components/dashboard/temperature-chart";
-import { WeatherData } from "@/lib/data";
+import { WeatherData } from "@/lib/weather-data";
 
 interface TemperatureTrendsCardProps {
   data: WeatherData[];

@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { PrecipitationChart } from "@/components/dashboard/precipitation-chart";
-import { WeatherData } from "@/lib/data";
+import { WeatherData } from "@/lib/weather-data";
 
 interface PrecipitationCardProps {
   data: WeatherData[];

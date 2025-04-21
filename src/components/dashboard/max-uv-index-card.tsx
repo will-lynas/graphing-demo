@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { WeatherData } from "@/lib/data";
+import { WeatherData } from "@/lib/weather-data";
 
 interface MaxUvIndexCardProps {
   data: WeatherData[];

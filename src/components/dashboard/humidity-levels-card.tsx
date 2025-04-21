@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { HumidityChart } from "@/components/dashboard/humidity-chart";
-import { WeatherData } from "@/lib/data";
+import { WeatherData } from "@/lib/weather-data";
 
 interface HumidityLevelsCardProps {
   data: WeatherData[];

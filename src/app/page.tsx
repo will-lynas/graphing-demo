@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { WeatherDashboard } from "@/components/dashboard/weather-dashboard";
-import { WeatherData } from "@/lib/data";
+import { WeatherData } from "@/lib/weather-data";
 
 export default function DashboardPage() {
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
