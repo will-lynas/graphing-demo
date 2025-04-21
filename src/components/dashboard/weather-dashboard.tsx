@@ -1,15 +1,12 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { TemperatureChart } from "@/components/dashboard/temperature-chart";
-import { HumidityChart } from "@/components/dashboard/humidity-chart";
-import { PrecipitationChart } from "@/components/dashboard/precipitation-chart";
-import { WeatherComparison } from "@/components/dashboard/weather-comparison";
 import { WeatherData } from "@/lib/data";
+import { AverageTemperatureCard } from "@/components/dashboard/average-temperature-card";
+import { AverageHumidityCard } from "@/components/dashboard/average-humidity-card";
+import { MaxUvIndexCard } from "@/components/dashboard/max-uv-index-card";
+import { TotalPrecipitationCard } from "@/components/dashboard/total-precipitation-card";
+import { TemperatureTrendsCard } from "@/components/dashboard/temperature-trends-card";
+import { HumidityLevelsCard } from "@/components/dashboard/humidity-levels-card";
+import { PrecipitationCard } from "@/components/dashboard/precipitation-card";
+import { WeatherMetricsComparisonCard } from "@/components/dashboard/weather-metrics-comparison-card";
 
 interface WeatherDashboardProps {
   data: WeatherData[];
@@ -20,120 +17,17 @@ export function WeatherDashboard({ data }: WeatherDashboardProps) {
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 pt-0 md:pt-0">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Avg. Temperature
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {(
-                  data.reduce((sum, item) => sum + item.temperature_c, 0) /
-                  data.length
-                ).toFixed(1)}
-                °C
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Based on {data.length} data points
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Avg. Humidity
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {(
-                  data.reduce((sum, item) => sum + item.humidity_percent, 0) /
-                  data.length
-                ).toFixed(1)}
-                %
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Based on {data.length} data points
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Max UV Index
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {Math.max(...data.map((item) => item.uv_index)).toFixed(1)}
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Highest recorded value
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Total Precipitation
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {data
-                  .reduce((sum, item) => sum + item.precipitation_mm, 0)
-                  .toFixed(1)}{" "}
-                mm
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Cumulative rainfall
-              </p>
-            </CardContent>
-          </Card>
+          <AverageTemperatureCard data={data} />
+          <AverageHumidityCard data={data} />
+          <MaxUvIndexCard data={data} />
+          <TotalPrecipitationCard data={data} />
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
-          <Card>
-            <CardHeader>
-              <CardTitle>Temperature Trends</CardTitle>
-              <CardDescription>
-                Daily temperature readings in Celsius
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="h-[300px]">
-              <TemperatureChart data={data} showDetails />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Humidity Levels</CardTitle>
-              <CardDescription>Daily humidity percentage</CardDescription>
-            </CardHeader>
-            <CardContent className="h-[300px]">
-              <HumidityChart data={data} showDetails />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Precipitation</CardTitle>
-              <CardDescription>Daily rainfall in millimeters</CardDescription>
-            </CardHeader>
-            <CardContent className="h-[300px]">
-              <PrecipitationChart data={data} showDetails />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Weather Metrics Comparison</CardTitle>
-              <CardDescription>
-                Radar chart comparing all weather metrics
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="h-[300px]">
-              <WeatherComparison data={data} />
-            </CardContent>
-          </Card>
+          <TemperatureTrendsCard data={data} />
+          <HumidityLevelsCard data={data} />
+          <PrecipitationCard data={data} />
+          <WeatherMetricsComparisonCard data={data} />
         </div>
       </main>
     </div>
