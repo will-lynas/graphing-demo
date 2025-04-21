@@ -49,7 +49,7 @@ export function PrecipitationChart({
       config={{
         precipitation: {
           label: "Precipitation (mm)",
-          color: "hsl(var(--chart-3))",
+          color: "hsl(var(--chart-2))",
         },
       }}
       className="h-full w-full"
@@ -92,9 +92,9 @@ export function PrecipitationChart({
           <Bar
             dataKey="value"
             name="precipitation"
-            // TODO: do this properly
             className="fill-chart-2"
-            fill="var(--color-precipitation)"
+            // TODO:
+            // fill="var(--color-precipitation)"
             radius={[4, 4, 0, 0]}
           />
         </BarChart>

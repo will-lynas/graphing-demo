@@ -93,6 +93,7 @@ export function TemperatureChart({
             type="monotone"
             dataKey="value"
             name="temperature"
+            // TODO:
             // stroke="var(--color-temperature)"
             strokeWidth={2}
             dot={false}
