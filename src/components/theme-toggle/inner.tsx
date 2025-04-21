@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Monitor, Moon, Sun } from "lucide-react";
+import ThemeToggleButton from "./button";
 
 export default function ThemeToggle({
   theme,
@@ -13,47 +14,15 @@ export default function ThemeToggle({
   return (
     <div className="flex items-center justify-end gap-4 p-4">
       <div className="inline-flex items-center rounded-lg border p-1 shadow-sm bg-card">
-        <Button
-          variant="ghost"
-          size="sm"
-          className={`rounded-md px-3 ${
-            theme === "light"
-              ? "bg-secondary text-secondary-foreground"
-              : "hover:bg-secondary/50"
-          }`}
-          onClick={() => setTheme("light")}
-          aria-label="Light"
-        >
+        <ThemeToggleButton thisTheme="light" theme={theme} setTheme={setTheme}>
           <Sun className="h-5 w-5" />
-        </Button>
-
-        <Button
-          variant="ghost"
-          size="sm"
-          className={`rounded-md px-3 ${
-            theme === "dark"
-              ? "bg-secondary text-secondary-foreground"
-              : "hover:bg-secondary/50"
-          }`}
-          onClick={() => setTheme("dark")}
-          aria-label="Dark"
-        >
+        </ThemeToggleButton>
+        <ThemeToggleButton thisTheme="dark" theme={theme} setTheme={setTheme}>
           <Moon className="h-5 w-5" />
-        </Button>
-
-        <Button
-          variant="ghost"
-          size="sm"
-          className={`rounded-md px-3 ${
-            theme === "system"
-              ? "bg-secondary text-secondary-foreground"
-              : "hover:bg-secondary/50"
-          }`}
-          onClick={() => setTheme("system")}
-          aria-label="System"
-        >
+        </ThemeToggleButton>
+        <ThemeToggleButton thisTheme="system" theme={theme} setTheme={setTheme}>
           <Monitor className="h-5 w-5" />
-        </Button>
+        </ThemeToggleButton>
       </div>
     </div>
   );
