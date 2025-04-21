@@ -13,7 +13,7 @@ export default function ThemeToggle({
 }) {
   return (
     <div className="flex items-center justify-end gap-4 p-4">
-      <div className="inline-flex items-center rounded-lg border p-1 shadow-sm bg-card">
+      <div className="inline-flex items-center rounded-lg border p-1 shadow-sm bg-card gap-0.5">
         <ThemeToggleButton thisTheme="light" theme={theme} setTheme={setTheme}>
           <Sun className="h-5 w-5" />
         </ThemeToggleButton>
