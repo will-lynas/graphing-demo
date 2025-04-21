@@ -2,10 +2,10 @@ import { AverageTemperatureCard } from "@/components/dashboard/summary/average-t
 import { AverageHumidityCard } from "@/components/dashboard/summary/average-humidity";
 import { MaxUvIndexCard } from "@/components/dashboard/summary/max-uv-index";
 import { TotalPrecipitationCard } from "@/components/dashboard/summary/total-precipitation";
-import { TemperatureTrendsCard } from "@/components/dashboard/temperature-trends-card";
-import { HumidityLevelsCard } from "@/components/dashboard/humidity-levels-card";
-import { PrecipitationCard } from "@/components/dashboard/precipitation-card";
-import { WeatherMetricsComparisonCard } from "@/components/dashboard/weather-metrics-comparison-card";
+import { TemperatureTrendsCard } from "@/components/dashboard/temperature-trends/card";
+import { HumidityLevelsCard } from "@/components/dashboard/humidity/card";
+import { PrecipitationCard } from "@/components/dashboard/precipitation/card";
+import { WeatherMetricsComparisonCard } from "@/components/dashboard/weather-comparison/card";
 import useSWR from "swr";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());

@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { WeatherComparison } from "@/components/dashboard/weather-comparison";
+import { WeatherComparison } from "@/components/dashboard/weather-comparison/chart";
 import { WeatherData } from "@/lib/weather-data";
 
 interface WeatherMetricsComparisonCardProps {
