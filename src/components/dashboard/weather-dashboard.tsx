@@ -1,4 +1,3 @@
-import { WeatherData } from "@/lib/weather-data";
 import { AverageTemperatureCard } from "@/components/dashboard/average-temperature-card";
 import { AverageHumidityCard } from "@/components/dashboard/average-humidity-card";
 import { MaxUvIndexCard } from "@/components/dashboard/max-uv-index-card";
@@ -7,38 +6,14 @@ import { TemperatureTrendsCard } from "@/components/dashboard/temperature-trends
 import { HumidityLevelsCard } from "@/components/dashboard/humidity-levels-card";
 import { PrecipitationCard } from "@/components/dashboard/precipitation-card";
 import { WeatherMetricsComparisonCard } from "@/components/dashboard/weather-metrics-comparison-card";
-import { useState, useEffect } from "react";
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export function WeatherDashboard() {
-  const [data, setWeatherData] = useState<WeatherData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, error, isLoading } = useSWR("/api/weather", fetcher);
 
-  useEffect(() => {
-    const fetchWeatherData = async () => {
-      try {
-        // This could obviously be rendered on the server
-        // However, the point of this app is to demonstrate fetching from an external API
-        // so that is what we are pretending to do here
-        const response = await fetch("/api/weather");
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setWeatherData(data);
-        setLoading(false);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
-        setLoading(false);
-      }
-    };
-
-    fetchWeatherData();
-  }, []);
-
-  if (loading) return <div className="p-4">Loading weather data...</div>;
+  if (isLoading) return <div className="p-4">Loading weather data...</div>;
   if (error) return <div className="p-4 text-red-500">Error: {error}</div>;
 
   return (
