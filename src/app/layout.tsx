@@ -14,8 +14,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const baseTitle = "Weather Dashboard";
+
 export const metadata: Metadata = {
-  title: "Weather Dashboard",
+  title:
+    process.env.NODE_ENV === "development" ? `[DEV] ${baseTitle}` : baseTitle,
   description: "A demo weather dashboard",
 };
 
