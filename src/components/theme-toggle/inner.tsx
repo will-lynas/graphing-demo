@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Monitor, Moon, Sun } from "lucide-react";
 import ThemeToggleButton from "./button";
 
