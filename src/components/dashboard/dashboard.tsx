@@ -9,6 +9,7 @@ import { HumidityLevelsCard } from "@/components/dashboard/humidity/card";
 import { PrecipitationCard } from "@/components/dashboard/precipitation/card";
 import { WeatherMetricsComparisonCard } from "@/components/dashboard/weather-comparison/card";
 import useSWR from "swr";
+import DashboardSkeleton from "./skeleton";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -16,9 +17,10 @@ export function WeatherDashboard() {
   // This could obviously be rendered on the server
   // However, the point of this app is to demonstrate fetching from an external API
   // so that is what we are pretending to do here
-  const { data } = useSWR("/api/weather", fetcher, {
-    suspense: true,
-  });
+  const { data, isLoading, error } = useSWR("/api/weather", fetcher);
+
+  if (isLoading) return <DashboardSkeleton />;
+  if (error) return <div>Error fetching weather data</div>;
 
   return (
     <div className="flex min-h-screen w-full flex-col">
