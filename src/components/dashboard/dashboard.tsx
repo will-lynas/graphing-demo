@@ -11,10 +11,9 @@ import useSWR from "swr";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export function WeatherDashboard() {
-  const { data, error, isLoading } = useSWR("/api/weather", fetcher);
-
-  if (isLoading) return <div className="p-4">Loading weather data...</div>;
-  if (error) return <div className="p-4 text-red-500">Error: {error}</div>;
+  const { data } = useSWR("/api/weather", fetcher, {
+    suspense: true,
+  });
 
   return (
     <div className="flex min-h-screen w-full flex-col">
