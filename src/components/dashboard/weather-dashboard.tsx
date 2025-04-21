@@ -7,12 +7,37 @@ import { TemperatureTrendsCard } from "@/components/dashboard/temperature-trends
 import { HumidityLevelsCard } from "@/components/dashboard/humidity-levels-card";
 import { PrecipitationCard } from "@/components/dashboard/precipitation-card";
 import { WeatherMetricsComparisonCard } from "@/components/dashboard/weather-metrics-comparison-card";
+import { useState, useEffect } from "react";
 
-interface WeatherDashboardProps {
-  data: WeatherData[];
-}
+export function WeatherDashboard() {
+  const [data, setWeatherData] = useState<WeatherData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-export function WeatherDashboard({ data }: WeatherDashboardProps) {
+  useEffect(() => {
+    const fetchWeatherData = async () => {
+      try {
+        const response = await fetch("/api/weather");
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setWeatherData(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+        setLoading(false);
+      }
+    };
+
+    fetchWeatherData();
+  }, []);
+
+  if (loading) return <div className="p-4">Loading weather data...</div>;
+  if (error) return <div className="p-4 text-red-500">Error: {error}</div>;
+
   return (
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 pt-0 md:pt-0">
