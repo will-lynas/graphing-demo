@@ -1,7 +1,7 @@
-import { AverageTemperatureCard } from "@/components/dashboard/average-temperature-card";
-import { AverageHumidityCard } from "@/components/dashboard/average-humidity-card";
-import { MaxUvIndexCard } from "@/components/dashboard/max-uv-index-card";
-import { TotalPrecipitationCard } from "@/components/dashboard/total-precipitation-card";
+import { AverageTemperatureCard } from "@/components/dashboard/summary/average-temperature";
+import { AverageHumidityCard } from "@/components/dashboard/summary/average-humidity";
+import { MaxUvIndexCard } from "@/components/dashboard/summary/max-uv-index";
+import { TotalPrecipitationCard } from "@/components/dashboard/summary/total-precipitation";
 import { TemperatureTrendsCard } from "@/components/dashboard/temperature-trends-card";
 import { HumidityLevelsCard } from "@/components/dashboard/humidity-levels-card";
 import { PrecipitationCard } from "@/components/dashboard/precipitation-card";
