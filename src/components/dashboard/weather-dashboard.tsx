@@ -17,6 +17,9 @@ export function WeatherDashboard() {
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
+        // This could obviously be rendered on the server
+        // However, the point of this app is to demonstrate fetching from an external API
+        // so that is what we are pretending to do here
         const response = await fetch("/api/weather");
 
         if (!response.ok) {
