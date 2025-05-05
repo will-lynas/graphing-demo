@@ -9,10 +9,13 @@ export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
-  // This is to prevent hydration error
-  // The server does not have access to the theme (stored in localStorage)
-  // In order to make the client render the same as the server, we initially set the theme to undefined
-  // Once the component is mounted, we set the theme to the correct value
+  // This is to prevent hydration error:
+  // The server does not have access to the theme, as it is stored in localStorage
+  // This means theme is undefined on the server
+  // On the first client render, theme has an actual value so causes a mismatch with the SSRed content
+  // To fix this, we initially set the theme to undefined on the client,
+  // then once the component is mounted, we set the theme to the correct value
+
   useEffect(() => {
     setMounted(true);
   }, []);
