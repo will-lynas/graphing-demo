@@ -86,7 +86,7 @@ export function WeatherComparison({ data }: WeatherComparisonProps) {
           <SelectTrigger className="w-[240px]">
             <SelectValue placeholder="Select a date" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="max-h-[300px] overflow-y-auto">
             {data.map((item) => (
               <SelectItem key={item.id} value={item.date}>
                 {format(new Date(item.date), "MMMM d, yyyy")}
